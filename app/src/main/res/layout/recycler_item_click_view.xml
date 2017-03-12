@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingLeft="30dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/alert_view_type"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Type :"/>
+
+    <TextView
+        android:id="@+id/alert_view_type_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/alert_view_type"
+        android:layout_alignBaseline="@+id/alert_view_type"/>
+
+    <TextView
+        android:id="@+id/alert_view_category"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Category :"
+        android:layout_below="@+id/alert_view_type"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/alert_view_category_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/alert_view_category"
+        android:layout_alignBaseline="@+id/alert_view_category"/>
+
+    <TextView
+        android:id="@+id/alert_view_description"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Description :"
+        android:layout_below="@+id/alert_view_category"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/alert_view_description_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/alert_view_description"
+        android:layout_alignBaseline="@+id/alert_view_description"/>
+
+    <TextView
+        android:id="@+id/alert_view_amount"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Amount :"
+        android:layout_below="@+id/alert_view_description"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/alert_view_amount_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/alert_view_amount"
+        android:layout_alignBaseline="@+id/alert_view_amount"/>
+
+    <TextView
+        android:id="@+id/alert_view_date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Date :"
+        android:layout_below="@+id/alert_view_amount"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/alert_view_date_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/alert_view_date"
+        android:layout_alignBaseline="@+id/alert_view_date"/>
+
+
+</RelativeLayout>

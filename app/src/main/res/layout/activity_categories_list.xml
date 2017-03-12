@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.expensemaster.Activities.CategoriesListActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:background="#e7f3ff">
+
+    <LinearLayout
+        android:id="@+id/catgoty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/txt_add_category"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:hint="Enter Category"
+            android:textSize="15dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="10dp"
+            android:singleLine="true"/>
+
+        <Button
+            android:id="@+id/btn_add_category_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:layout_toRightOf="@+id/txt_add_category"
+            android:layout_alignBaseline="@+id/txt_add_category"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_category_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories List"
+        android:textStyle="bold"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/catgoty_layout"
+        android:paddingLeft="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <ListView
+        android:id="@+id/categories_list"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txt_category_list"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp"
+        android:scrollbars="none">
+    </ListView>
+
+</RelativeLayout>

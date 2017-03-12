@@ -24,6 +24,7 @@ import com.expensemaster.Bean.Expense;
 import com.expensemaster.DAO.SQLiteDAOImpl;
 import com.expensemaster.Supporting.CategoriesListViewAdapter;
 import com.expensemaster.Supporting.ExpenseListViewAdapter;
+import com.expensemaster.Supporting.Validator;
 
 import java.util.List;
 
@@ -152,10 +153,17 @@ public class CategoriesListActivity extends AppCompatActivity {
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoriesList = daoImpl.addCategory(categoryText.getText().toString());
-                CategoriesListViewAdapter expenseListViewAdapter = new CategoriesListViewAdapter(getApplication(), categoriesList);
-                listCategories.setAdapter(expenseListViewAdapter);
-                categoryText.setText(null);
+                if(Validator.hasText(categoryText)){
+                    if(!categoriesList.contains(categoryText.getText().toString().trim())){
+                        categoriesList = daoImpl.addCategory(categoryText.getText().toString().trim());
+                        CategoriesListViewAdapter expenseListViewAdapter = new CategoriesListViewAdapter(getApplication(), categoriesList);
+                        listCategories.setAdapter(expenseListViewAdapter);
+                        categoryText.setText(null);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Category already present!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }

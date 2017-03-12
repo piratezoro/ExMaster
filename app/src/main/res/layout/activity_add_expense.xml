@@ -41,117 +41,124 @@
 
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/radio_group"
-        android:paddingLeft="10dp"/>
-
-    <EditText
-        android:id="@+id/txt_category"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:hint="Select Category"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="10dp"
-        android:layout_below="@+id/category"
-        />
-
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Amount"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txt_category"
-        android:paddingLeft="10dp"/>
-
-    <EditText
-        android:id="@+id/txt_amount"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:hint="Enter Amount"
-        android:textSize="15dp"
-        android:inputType="numberDecimal"
-        android:layout_below="@+id/amount"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="10dp"/>
-
-    <TextView
-        android:id="@+id/remarks"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txt_amount"
-        android:paddingLeft="10dp"/>
-
-    <EditText
-        android:id="@+id/txt_remarks"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:hint="Enter Description"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/remarks"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="10dp"
-        android:nextFocusDown="@+id/txt_date"
-        android:singleLine="true"/>
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txt_remarks"
-        android:paddingLeft="10dp"/>
-
-    <EditText
-        android:id="@+id/txt_date"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:hint="Select Date"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/date"
-        android:editable="false"
-        android:background="@drawable/rounded_edittext"
-        android:paddingLeft="10dp"/>
-
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layout_add_expense"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_date"
-        android:gravity="center">
+        android:layout_below="@+id/radio_group">
 
-        <Button
-            android:id="@+id/btn_submit_new_expense"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:text="Category"
+            android:textStyle="bold"
             android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true"
-            android:text="Save &amp; New"/>
+            android:paddingLeft="10dp"/>
 
-        <Button
-            android:id="@+id/btn_submit_expense"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/txt_category"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="Select Category"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/category"
+            />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true"
-            android:text="Save"
-            android:layout_toRightOf="@+id/btn_submit_new_expense"/>
+            android:text="Amount"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/txt_category"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/txt_amount"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="Enter Amount"
+            android:textSize="15dp"
+            android:inputType="numberDecimal"
+            android:layout_below="@+id/amount"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/remarks"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/txt_amount"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/txt_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="Enter Description"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/remarks"
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="10dp"
+            android:nextFocusDown="@+id/txt_date"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/txt_remarks"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="Select Date"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/date"
+            android:editable="false"
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_date"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_submit_new_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:text="Save &amp; New"/>
+
+            <Button
+                android:id="@+id/btn_submit_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:text="Save"
+                android:layout_toRightOf="@+id/btn_submit_new_expense"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

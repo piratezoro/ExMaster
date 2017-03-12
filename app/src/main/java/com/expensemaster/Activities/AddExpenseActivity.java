@@ -2,6 +2,7 @@ package com.expensemaster.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.MonthDisplayHelper;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.expensemaster.Bean.Expense;
 import com.expensemaster.DAO.SQLiteDAO;
 import com.expensemaster.DAO.SQLiteDAOImpl;
 import com.expensemaster.Management.ManagementBean;
+import com.expensemaster.Supporting.Validator;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -40,6 +43,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private Button submitExpense, submitNewExpense;
     private EditText txtCategory, txtAmount, txtRemarks, txtDate, txtIdHidden;
     private RadioGroup radioGroup;
+    private RelativeLayout layoutAddExpense;
     private SQLiteDAO daoImpl;
 
     @Override
@@ -60,6 +64,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         txtDate = (EditText) findViewById(R.id.txt_date);
         radioGroup = (RadioGroup) findViewById(R.id.radio_group);
         txtIdHidden = (EditText) findViewById(R.id.txt_id_hidden);
+        layoutAddExpense = (RelativeLayout) findViewById(R.id.layout_add_expense);
         daoImpl = new ManagementBean().getDAOFactory(getApplicationContext());
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -154,6 +159,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                     txtDate.setText(dayOfMonth + "-" + (new DateFormatSymbols().getShortMonths()[monthOfYear]) + "-" + year);
+                                    txtDate.setError(null);
                                 }
                             }, mYear, mMonth, mDay);
                     dpd.show();
@@ -179,11 +185,25 @@ public class AddExpenseActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 txtDate.setText(dayOfMonth + "-" + (new DateFormatSymbols().getShortMonths()[monthOfYear]) + "-" + year);
+                                txtDate.setError(null);
                             }
                         }, mYear, mMonth, mDay);
                 dpd.show();
             }
         });
+
+        if(radioGroup.getCheckedRadioButtonId()==-1){
+            layoutAddExpense.setVisibility(View.INVISIBLE);
+        }
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                layoutAddExpense.setVisibility(View.VISIBLE);
+            }
+        });
+
+
 
         submitNewExpense.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,30 +235,34 @@ public class AddExpenseActivity extends AppCompatActivity {
         submitExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Expense expense = new Expense();
-                if(!txtIdHidden.getText().toString().isEmpty()){
-                    expense.setId(Integer.parseInt(txtIdHidden.getText().toString()));
-                }
-                RadioButton typeRadioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
-                expense.setType(typeRadioButton.getText().toString());
-                expense.setCategory(txtCategory.getText().toString());
-                expense.setAmount(Float.parseFloat(txtAmount.getText().toString()));
-                expense.setRemarks(txtRemarks.getText().toString());
-                try {
-                    expense.setDate(formatter.parse(txtDate.getText().toString()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                daoImpl.addExpense(expense);
-                Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
-                radioGroup.check(0);
-                txtCategory.setText(null);
-                txtAmount.setText(null);
-                txtRemarks.setText(null);
-                txtDate.setText(null);
+                //System.out.println(Validator.hasText(txtCategory));
 
-                Intent intent = new Intent(getApplicationContext(),OverviewActivity.class);
-                startActivity(intent);
+                if(Validator.hasText(txtCategory) && Validator.hasText(txtAmount) && Validator.hasText(txtRemarks) && Validator.hasText(txtDate)) {
+                    Expense expense = new Expense();
+                    if (!txtIdHidden.getText().toString().isEmpty()) {
+                        expense.setId(Integer.parseInt(txtIdHidden.getText().toString()));
+                    }
+                    RadioButton typeRadioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+                    expense.setType(typeRadioButton.getText().toString());
+                    expense.setCategory(txtCategory.getText().toString());
+                    expense.setAmount(Float.parseFloat(txtAmount.getText().toString()));
+                    expense.setRemarks(txtRemarks.getText().toString());
+                    try {
+                        expense.setDate(formatter.parse(txtDate.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    daoImpl.addExpense(expense);
+                    Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
+                    radioGroup.check(0);
+                    txtCategory.setText(null);
+                    txtAmount.setText(null);
+                    txtRemarks.setText(null);
+                    txtDate.setText(null);
+
+                    Intent intent = new Intent(getApplicationContext(), OverviewActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

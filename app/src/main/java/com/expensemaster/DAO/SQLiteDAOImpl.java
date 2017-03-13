@@ -606,4 +606,29 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
         db.close();
         return expenses;
     }
+    @Override
+    public List<Category> getExpense(String from, String to) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Category> categoryList = new ArrayList<Category>();
+        /*String selectquery= "SELECT * FROM "+ EXPENSE_TABLE_NAME+" WHERE date"
+                +" between '" + from+"' and '" +to+ "' ORDER BY "+date +" DESC;";*/
+        String selectquery= "SELECT Category,sum(Amount) FROM "+ EXPENSE_TABLE_NAME+" WHERE "+type+" = 'Expense' AND date " +
+                " between '"+from+"' and '"+to + "' GROUP BY "+category +";";
+
+        System.out.println(selectquery);
+        Cursor cursor= db.rawQuery(selectquery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Category category = new Category();
+                category.setCategory(cursor.getString(0));
+                category.setAmount(cursor.getFloat(1));
+
+                categoryList.add(category);
+               System.out.println(" -" + from +to);
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return categoryList;
+    }
+
 }

@@ -9,17 +9,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ChartsActivity">
 
-    <Button
-        android:id="@+id/btn_pie_chart"
+    <com.androidplot.pie.PieChart
+        android:id="@+id/mySimplePieChart"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        androidPlot.title.text="Pie Chart"
+        android:layout_marginTop="40dp"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/layout_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pie"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/mySimplePieChart">
+
+        <EditText
+            android:id="@+id/txt_from"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Select From Date"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:id="@+id/txt_to"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/txt_from"
+            android:editable="false"
+            android:hint="Select To Date"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center_horizontal"/>
+
+    </RelativeLayout>
 
     <Button
-        android:id="@+id/btn_bar_chart"
+        android:id="@+id/btn_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bar"
-        android:layout_below="@+id/btn_pie_chart"/>
+        android:text="Search"
+        android:layout_below="@+id/layout_search"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:textColor="@color/off_white"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

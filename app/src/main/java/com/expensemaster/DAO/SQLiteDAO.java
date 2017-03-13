@@ -27,4 +27,6 @@ public interface SQLiteDAO {
     public List<String> getAllCategories();
     public List<String> deleteCategory(String cat);
     public List<Expense> searchTransactions(String from, String to);
+    public List<Category> getExpense(String from, String to);
+
 }

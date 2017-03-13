@@ -9,8 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.expensemaster.Activities.CategoriesListActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true"
-    android:background="#e7f3ff">
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:id="@+id/catgoty_layout"

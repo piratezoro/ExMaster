@@ -45,8 +45,6 @@
         android:text="Search"
         android:layout_below="@+id/layout_search"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
-        android:textColor="@color/off_white"
         android:layout_marginTop="20dp"/>
 
     <android.support.v7.widget.RecyclerView

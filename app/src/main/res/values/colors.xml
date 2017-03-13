@@ -17,6 +17,10 @@
     <color name="violet">#7F00FF</color>
     <color name="magenta">#FF00FF</color>
 
+    <color name="DarkGrey">#707070</color>
+    <color name="LightGrey">#909090</color>
+    <color name="Grey">#C0C0C0</color>
+
     <array name="rainbow">
         <item>@color/bright_pink</item>
         <item>@color/red</item>

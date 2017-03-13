@@ -9,8 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.expensemaster.Activities.AddExpenseActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true"
-    android:background="#e7f3ff">
+    android:focusableInTouchMode="true">
 
     <EditText
         android:id="@+id/txt_id_hidden"

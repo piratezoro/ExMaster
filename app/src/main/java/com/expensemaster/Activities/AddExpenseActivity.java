@@ -199,7 +199,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                layoutAddExpense.setVisibility(View.VISIBLE);
+                System.out.println("checkedId" + checkedId);
+                if (checkedId == 0) {
+                    layoutAddExpense.setVisibility(View.INVISIBLE);
+                } else {
+                    layoutAddExpense.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -208,27 +214,30 @@ public class AddExpenseActivity extends AppCompatActivity {
         submitNewExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Expense expense = new Expense();
-                if(!txtIdHidden.getText().toString().isEmpty()){
-                    expense.setId(Integer.parseInt(txtIdHidden.getText().toString()));
+
+                if (Validator.hasText(txtCategory) && Validator.hasText(txtAmount) && Validator.hasText(txtRemarks) && Validator.hasText(txtDate)) {
+                    Expense expense = new Expense();
+                    if (!txtIdHidden.getText().toString().isEmpty()) {
+                        expense.setId(Integer.parseInt(txtIdHidden.getText().toString()));
+                    }
+                    RadioButton typeRadioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+                    expense.setType(typeRadioButton.getText().toString());
+                    expense.setCategory(txtCategory.getText().toString());
+                    expense.setAmount(Float.parseFloat(txtAmount.getText().toString()));
+                    expense.setRemarks(txtRemarks.getText().toString());
+                    try {
+                        expense.setDate(formatter.parse(txtDate.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    daoImpl.addExpense(expense);
+                    Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
+                    radioGroup.check(0);
+                    txtCategory.setText(null);
+                    txtAmount.setText(null);
+                    txtRemarks.setText(null);
+                    txtDate.setText(null);
                 }
-                RadioButton typeRadioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
-                expense.setType(typeRadioButton.getText().toString());
-                expense.setCategory(txtCategory.getText().toString());
-                expense.setAmount(Float.parseFloat(txtAmount.getText().toString()));
-                expense.setRemarks(txtRemarks.getText().toString());
-                try {
-                    expense.setDate(formatter.parse(txtDate.getText().toString()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                daoImpl.addExpense(expense);
-                Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
-                radioGroup.check(0);
-                txtCategory.setText(null);
-                txtAmount.setText(null);
-                txtRemarks.setText(null);
-                txtDate.setText(null);
             }
         });
 
@@ -237,7 +246,7 @@ public class AddExpenseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //System.out.println(Validator.hasText(txtCategory));
 
-                if(Validator.hasText(txtCategory) && Validator.hasText(txtAmount) && Validator.hasText(txtRemarks) && Validator.hasText(txtDate)) {
+                if (Validator.hasText(txtCategory) && Validator.hasText(txtAmount) && Validator.hasText(txtRemarks) && Validator.hasText(txtDate)) {
                     Expense expense = new Expense();
                     if (!txtIdHidden.getText().toString().isEmpty()) {
                         expense.setId(Integer.parseInt(txtIdHidden.getText().toString()));

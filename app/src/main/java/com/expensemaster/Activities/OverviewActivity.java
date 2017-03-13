@@ -45,9 +45,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 public class OverviewActivity extends AppCompatActivity {
 
@@ -187,7 +192,9 @@ public class OverviewActivity extends AppCompatActivity {
         exportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveExcelFile(getApplicationContext(), "ExpenseMaster.xlsx");
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                Calendar c = GregorianCalendar.getInstance();
+                saveExcelFile(getApplicationContext(), "ExpenseMaster"+df.format(c.getTime())+ ".xlsx");
                 AlertDialog.Builder builder =  new AlertDialog.Builder(OverviewActivity.this);
                 builder.setTitle("File exported successfully!");
                 builder.setMessage("File directory is : "+getApplicationContext().getExternalFilesDir(null).getAbsolutePath());

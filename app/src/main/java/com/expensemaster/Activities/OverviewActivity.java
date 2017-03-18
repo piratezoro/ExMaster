@@ -59,7 +59,7 @@ public class OverviewActivity extends AppCompatActivity {
     //private PieChart pie;
     private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount, dayIncomeAmount, weekIncomeAmount, monthIncomeAmount;
     private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
-    private RelativeLayout dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout;
+    private RelativeLayout layout1,layout2, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout;
     int[] rainbow;
 
     SQLiteDAOImpl daoImpl;
@@ -72,6 +72,9 @@ public class OverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setTitle("Expense Master");
+
+        layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        layout2 = (RelativeLayout) findViewById(R.id.layout2);
 
         rainbow = getApplicationContext().getResources().getIntArray(R.array.rainbow);
         weekExpenseAmount = (TextView) findViewById(R.id.txt_week_expense_amount);
@@ -101,6 +104,14 @@ public class OverviewActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
                 Intent intent = new Intent(getApplicationContext(), AddExpenseActivity.class);
                 intent.putExtra("flag", "New");
+                startActivity(intent);
+            }
+        });
+
+        layout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), OnlyExpensesActivity.class);
                 startActivity(intent);
             }
         });

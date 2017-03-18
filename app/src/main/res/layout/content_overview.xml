@@ -13,283 +13,357 @@
     tools:showIn="@layout/activity_overview"
     android:background="#E8E8E8">
 
-    <RelativeLayout
-        android:id="@+id/expense_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_grey_edittext"
-        android:padding="5dp"
-        android:elevation="5dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/day_expense_layout"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@drawable/activated_background2">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txt_day_expense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Today's Expense"
-                android:textColor="@color/ap_white"/>
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:background="@color/ap_white">
 
-            <TextView
-                android:id="@+id/txt_day_expense_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_day_expense"
-                android:textColor="@color/ap_white"/>
+                <RelativeLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/expense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Expense"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card1"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Income"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/week_expense_layout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/day_expense_layout"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/activated_background2">
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/txt_week_expense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This Week Expense"
-                android:textColor="@color/ap_white"/>
-
-            <TextView
-                android:id="@+id/txt_week_expense_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_week_expense"
-                android:textColor="@color/ap_white"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/month_expense_layout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/week_expense_layout"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/activated_background2">
-
-            <TextView
-                android:id="@+id/txt_month_expense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This Month Expense"
-                android:textColor="@color/ap_white"/>
-
-            <TextView
-                android:id="@+id/txt_month_expense_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_month_expense"
-                android:textColor="@color/ap_white"/>
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/income_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_grey_edittext"
-        android:padding="5dp"
-        android:layout_below="@+id/expense_layout"
-        android:layout_marginTop="20dp"
-        android:elevation="5dp">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginTop="160dp">
 
         <RelativeLayout
-            android:id="@+id/day_income_layout"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@drawable/activated_background2">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txt_day_income"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/expense_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Today's Income"
-                android:textColor="@color/ap_white"/>
+                android:background="@drawable/round_grey_edittext"
+                android:padding="5dp"
+                android:elevation="5dp">
 
-            <TextView
-                android:id="@+id/txt_day_income_amount"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/day_expense_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_day_expense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today's Expense"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_day_expense_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_day_expense"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/week_expense_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/day_expense_layout"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_week_expense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This Week Expense"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_week_expense_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_week_expense"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/month_expense_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/week_expense_layout"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_month_expense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This Month Expense"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_month_expense_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_month_expense"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/income_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_day_income"
-                android:textColor="@color/ap_white"/>
+                android:background="@drawable/round_grey_edittext"
+                android:padding="5dp"
+                android:layout_below="@+id/expense_layout"
+                android:layout_marginTop="20dp"
+                android:elevation="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/day_income_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_day_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today's Income"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_day_income_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_day_income"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/week_income_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/day_income_layout"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_week_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This Week Income"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_week_income_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_week_income"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/month_income_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/week_income_layout"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/activated_background2">
+
+                    <TextView
+                        android:id="@+id/txt_month_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This Month Income"
+                        android:textColor="@color/ap_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_month_income_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBaseline="@+id/txt_month_income"
+                        android:textColor="@color/ap_white"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/income_layout"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view1"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+                    android:layout_marginRight="20dp"
+                    android:elevation="5dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <Button
+                        android:id="@+id/btn_get_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:textAlignment="center"
+                        android:text="Chart"
+                        android:background="@drawable/ic_pie_chart_black_24dp"/>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view2"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+                    android:layout_toRightOf="@+id/card_view1"
+                    android:layout_alignBottom="@+id/card_view1"
+                    android:elevation="5dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <Button
+                        android:id="@+id/btn_get_file"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:textAlignment="center"
+                        android:text="Export"
+                        android:background="@drawable/ic_file_download_black_24dp"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view3"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+                    android:layout_below="@+id/card_view1"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:elevation="5dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <Button
+                        android:id="@+id/btn_get_expense"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="All Transactions"
+                        android:gravity="bottom"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:inputType="text"
+                        android:background="@drawable/ic_account_balance_wallet_black_36dp"/>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view4"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+                    android:layout_toRightOf="@+id/card_view3"
+                    android:layout_alignBottom="@+id/card_view3"
+                    android:elevation="5dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <Button
+                        android:id="@+id/btn_add_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Add Categories"
+                        android:gravity="bottom"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:inputType="text"
+                        android:background="@drawable/ic_playlist_add_black_24dp"/>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/week_income_layout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/day_income_layout"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/activated_background2">
-
-            <TextView
-                android:id="@+id/txt_week_income"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This Week Income"
-                android:textColor="@color/ap_white"/>
-
-            <TextView
-                android:id="@+id/txt_week_income_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_week_income"
-                android:textColor="@color/ap_white"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/month_income_layout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/week_income_layout"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/activated_background2">
-
-            <TextView
-                android:id="@+id/txt_month_income"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This Month Income"
-                android:textColor="@color/ap_white"/>
-
-            <TextView
-                android:id="@+id/txt_month_income_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:layout_alignParentRight="true"
-                android:layout_alignBaseline="@+id/txt_month_income"
-                android:textColor="@color/ap_white"/>
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/income_layout"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view1"
-            android:layout_gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="110dp"
-            android:layout_marginRight="20dp"
-            android:elevation="5dp"
-            android:background="@color/colorPrimaryDark">
-
-            <Button
-                android:id="@+id/btn_get_chart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:textAlignment="center"
-                android:text="Chart"
-                android:background="@drawable/ic_pie_chart_black_24dp"/>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view2"
-            android:layout_gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="110dp"
-            android:layout_toRightOf="@+id/card_view1"
-            android:layout_alignBottom="@+id/card_view1"
-            android:elevation="5dp"
-            android:background="@color/colorPrimaryDark">
-
-            <Button
-                android:id="@+id/btn_get_file"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:textAlignment="center"
-                android:text="Export"
-                android:background="@drawable/ic_file_download_black_24dp"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view3"
-            android:layout_gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="110dp"
-            android:layout_below="@+id/card_view1"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:elevation="5dp"
-            android:background="@color/colorPrimaryDark">
-
-            <Button
-                android:id="@+id/btn_get_expense"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="All Transactions"
-                android:gravity="bottom"
-                android:textAlignment="center"
-                android:textSize="15dp"
-                android:inputType="text"
-                android:background="@drawable/ic_account_balance_wallet_black_36dp"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view4"
-            android:layout_gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="110dp"
-            android:layout_toRightOf="@+id/card_view3"
-            android:layout_alignBottom="@+id/card_view3"
-            android:elevation="5dp"
-            android:background="@color/colorPrimaryDark">
-
-            <Button
-                android:id="@+id/btn_add_category"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Add Categories"
-                android:gravity="bottom"
-                android:textAlignment="center"
-                android:textSize="15dp"
-                android:inputType="text"
-                android:background="@drawable/ic_playlist_add_black_24dp"/>
-
-        </android.support.v7.widget.CardView>
-
-    </RelativeLayout>
-
-    <!--<com.androidplot.pie.PieChart
-        android:id="@+id/mySimplePieChart"
-        android:layout_width="fill_parent"
-        android:layout_height="250dp"
-        androidPlot.title.text="Pie Chart for expenses"
-        android:layout_below="@+id/income_layout"/>-->
-
+    </ScrollView>
 
 
 </RelativeLayout>

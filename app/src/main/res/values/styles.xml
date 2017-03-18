@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/DarkGrey</item>
-        <item name="colorPrimaryDark">@color/LightGrey</item>
-        <item name="colorAccent">@color/DarkGrey</item>
+        <item name="colorPrimary">@color/Orange</item>
+        <item name="colorPrimaryDark">@color/DarkOrange</item>
+        <item name="colorAccent">@color/Orange</item>
     </style>
 
     <style name="AppTheme.PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">

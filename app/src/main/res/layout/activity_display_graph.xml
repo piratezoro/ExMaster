@@ -10,23 +10,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.expensemaster.Activities.DisplayGraphActivity">
 
-    <com.androidplot.pie.PieChart
-        android:id="@+id/mySimplePieChart"
-        android:layout_width="fill_parent"
-        android:layout_height="250dp"
-        android:layout_weight="1"
-        androidPlot.title.text="A Simple Pie Chart"
-        android:layout_marginTop="40dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-    <com.androidplot.xy.XYPlot
-        android:id="@+id/plot"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        ap:title="A Simple XY Plot"
-        ap:rangeTitle="range"
-        ap:domainTitle="domain"
-        ap:lineLabels="left|bottom"
-        ap:lineLabelRotationBottom="-45"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.androidplot.pie.PieChart
+                android:id="@+id/mySimplePieChart"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                androidPlot.title.text="A Simple Pie Chart"
+                android:layout_marginTop="40dp"/>
+
+            <com.androidplot.xy.XYPlot
+                android:id="@+id/plot"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                ap:title="A Simple XY Plot"
+                ap:rangeTitle="range"
+                ap:domainTitle="domain"
+                ap:lineLabels="left|bottom"
+                ap:lineLabelRotationBottom="-45"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

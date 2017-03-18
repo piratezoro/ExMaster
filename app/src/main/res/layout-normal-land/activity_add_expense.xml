@@ -166,6 +166,15 @@
                         android:text="Save"
                         android:layout_toRightOf="@+id/btn_submit_new_expense"/>
 
+                    <Button
+                        android:id="@+id/btn_extra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Extra"
+                        android:layout_below="@+id/btn_submit_new_expense"/>
+
                 </RelativeLayout>
 
             </RelativeLayout>

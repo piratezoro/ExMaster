@@ -22,19 +22,24 @@
         </activity>
         <activity
             android:name=".AddExpenseActivity"
-            android:parentActivityName=".OverviewActivity" />
+            android:parentActivityName=".OverviewActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ExpenseListActivity" />
         <activity
             android:name=".ExpenseRecyclerActivity"
             android:parentActivityName=".OverviewActivity" />
         <activity
             android:name=".CategoriesListActivity"
-            android:parentActivityName=".OverviewActivity" />
+            android:parentActivityName=".OverviewActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SearchTransactionActivity"
             android:parentActivityName=".OverviewActivity" />
-        <activity android:name=".ChartsActivity" />
-        <activity android:name=".DisplayGraphActivity"></activity>
+        <activity
+            android:name=".ChartsActivity"
+            android:parentActivityName=".OverviewActivity" />
+        <activity android:name=".DisplayGraphActivity" />
+        <activity android:name=".OnlyExpensesActivity"></activity>
     </application>
 
 </manifest>

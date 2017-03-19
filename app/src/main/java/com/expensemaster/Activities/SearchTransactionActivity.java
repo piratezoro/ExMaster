@@ -1,6 +1,9 @@
 package com.expensemaster.Activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -105,15 +108,36 @@ public class SearchTransactionActivity extends AppCompatActivity {
                 try {
                     fromDate = df.format(formatter.parse(txtFrom.getText().toString()));
                     toDate = df.format(formatter.parse(txtTo.getText().toString()));
-                    System.out.println(fromDate+"="+toDate);
+                    System.out.println("dates are as follows"+fromDate+"="+toDate);
+             /*       if(fromDate.equals(null))
+                    {
+
+                        System.out.println("mai ayay aya aya");
+                        AlertDialog.Builder builder =  new AlertDialog.Builder(SearchTransactionActivity.this);
+                        builder.setTitle("Message");
+                        builder.setMessage("No Transaction found");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
+                    }
+             */
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 expenseList = daoImpl.searchTransactions(fromDate, toDate);
 
                 mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
                 searchRecyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
+
 
             }
         });

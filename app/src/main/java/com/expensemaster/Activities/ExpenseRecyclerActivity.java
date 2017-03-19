@@ -70,16 +70,41 @@ public class ExpenseRecyclerActivity extends AppCompatActivity{
             setTitle("Month's Income");
             expenseList = daoImpl.getMonthIncome();
         }
+        if (expenseList.isEmpty())
+        {
+            System.out.println("inside is empty");
+            Toast.makeText(ExpenseRecyclerActivity.this,"No Data Found", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder =  new AlertDialog.Builder(ExpenseRecyclerActivity.this);
+            builder.setTitle("Message");
+            builder.setMessage("No Data Found");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                    dialog.cancel();
+                    Intent intent = new Intent(getApplicationContext(), OverviewActivity.class);
+                    //        intent.putExtra("flag", "New");
+                    startActivity(intent);
 
-        mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+        else
+        {
+            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+            mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+
+        }
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ExpenseRecyclerActivity.this, android.R.layout.select_dialog_singlechoice);
         arrayAdapter.add("Delete");

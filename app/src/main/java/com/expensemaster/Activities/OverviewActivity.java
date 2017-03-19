@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -58,18 +60,28 @@ public class OverviewActivity extends AppCompatActivity {
 
     //private PieChart pie;
     private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount, dayIncomeAmount, weekIncomeAmount, monthIncomeAmount;
+    private TextView dayExpense, weekExpense, monthExpense, dayIncome, weekIncome, monthIncome;
+
     private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
     private RelativeLayout dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout;
     int[] rainbow;
-
+Context context;
     SQLiteDAOImpl daoImpl;
-
+    Typeface custom_font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Montserrat-Regular.otf");
+
+        /*AssetManager am = context.getApplicationContext().getAssets();
+
+        typeface = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "fonts/Oswald-Bold.ttf"));
+
+       // setTypeface(typeface);*/
 
         setTitle("Expense Master");
 
@@ -90,7 +102,28 @@ public class OverviewActivity extends AppCompatActivity {
         dayIncomeLayout = (RelativeLayout)findViewById(R.id.day_income_layout);
         weekIncomeLayout = (RelativeLayout)findViewById(R.id.week_income_layout);
         monthIncomeLayout = (RelativeLayout)findViewById(R.id.month_income_layout);
+        //
+        dayExpense = (TextView) findViewById(R.id.txt_day_expense);
+        weekExpense = (TextView) findViewById(R.id.txt_week_expense);
+        monthExpense = (TextView) findViewById(R.id.txt_month_expense);
+        dayIncome = (TextView) findViewById(R.id.txt_day_income);
+        weekIncome = (TextView) findViewById(R.id.txt_week_income);
+        monthIncome = (TextView) findViewById(R.id.txt_month_income);
 
+        //font chnage
+        /*dayExpense.setTypeface(custom_font);
+        weekExpense.setTypeface(custom_font);
+        monthExpense.setTypeface(custom_font);
+        dayIncome.setTypeface(custom_font);
+        weekIncome.setTypeface(custom_font);
+        monthIncome.setTypeface(custom_font);
+
+        dayExpenseAmount.setTypeface(custom_font);
+        weekExpenseAmount.setTypeface(custom_font);
+        monthExpenseAmount.setTypeface(custom_font);
+        dayIncomeAmount.setTypeface(custom_font);
+        weekIncomeAmount.setTypeface(custom_font);
+        monthIncomeAmount.setTypeface(custom_font);*/
         daoImpl=new SQLiteDAOImpl(OverviewActivity.this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -108,6 +141,7 @@ public class OverviewActivity extends AppCompatActivity {
         chartDisplayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), ChartsActivity.class);
                 startActivity(intent);
             }
@@ -217,27 +251,36 @@ public class OverviewActivity extends AppCompatActivity {
         dayExpenseAmount.setText(data.getCurrentDayExpense());
         if(data.getCurrentDayExpense() == null){
             dayExpenseAmount.setText("0");
-        }
+             }
+
         weekExpenseAmount.setText(data.getCurrentWeekExpense());
-        if(data.getCurrentWeekExpense() == null){
+        if (data.getCurrentWeekExpense() == null){
             weekExpenseAmount.setText("0");
         }
+
         monthExpenseAmount.setText(data.getCurrentMonthExpense());
-        if(data.getCurrentMonthExpense() == null){
+        if (data.getCurrentMonthExpense() == null){
             monthExpenseAmount.setText("0");
+
         }
         dayIncomeAmount.setText(data.getCurrentDayIncome());
-        if(data.getCurrentDayIncome() == null){
+        if (data.getCurrentDayIncome() == null){
             dayIncomeAmount.setText("0");
+
         }
         weekIncomeAmount.setText(data.getCurrentWeekIncome());
         if(data.getCurrentWeekIncome() == null){
             weekIncomeAmount.setText("0");
+
         }
         monthIncomeAmount.setText(data.getCurrentMonthIncome());
         if(data.getCurrentMonthIncome() == null){
+
             monthIncomeAmount.setText("0");
+
         }
+
+
     }
 
     /*private void piechartdisplay() {

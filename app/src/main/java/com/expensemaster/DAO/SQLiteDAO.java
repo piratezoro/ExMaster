@@ -2,7 +2,9 @@ package com.expensemaster.DAO;
 
 import com.expensemaster.Bean.Category;
 import com.expensemaster.Bean.Expense;
+import com.expensemaster.Bean.ExpensePage;
 import com.expensemaster.Bean.FirstPageData;
+import com.expensemaster.Bean.IncomePage;
 
 import java.util.Date;
 import java.util.List;
@@ -28,5 +30,7 @@ public interface SQLiteDAO {
     public List<String> deleteCategory(String cat);
     public List<Expense> searchTransactions(String from, String to);
     public List<Category> getExpense(String from, String to);
+    public ExpensePage getExpenseData();
+    public IncomePage getIncomeData();
 
 }

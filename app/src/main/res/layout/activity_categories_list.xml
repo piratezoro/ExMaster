@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.expensemaster.Activities.CategoriesListActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:background="#E8E8E8">
 
     <LinearLayout
         android:id="@+id/catgoty_layout"
@@ -24,7 +25,6 @@
             android:layout_height="40dp"
             android:hint="Enter Category"
             android:textSize="15dp"
-            android:background="@drawable/rounded_edittext"
             android:paddingLeft="10dp"
             android:singleLine="true"/>
 

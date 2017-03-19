@@ -4,11 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.EmbossMaskFilter;
-import android.graphics.Path;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,17 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidplot.pie.PieChart;
-import com.androidplot.pie.Segment;
-import com.androidplot.pie.SegmentFormatter;
-import com.androidplot.util.PixelUtils;
-import com.expensemaster.Bean.Category;
 import com.expensemaster.Bean.Expense;
-import com.expensemaster.Bean.FirstPageData;
+import com.expensemaster.DAO.SQLiteDAO;
 import com.expensemaster.DAO.SQLiteDAOImpl;
+import com.expensemaster.Management.ManagementBean;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -41,15 +32,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -57,12 +45,12 @@ import java.util.Locale;
 public class OverviewActivity extends AppCompatActivity {
 
     //private PieChart pie;
-    private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount, dayIncomeAmount, weekIncomeAmount, monthIncomeAmount;
+    /*private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount, dayIncomeAmount, weekIncomeAmount, monthIncomeAmount;*/
     private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
-    private RelativeLayout layout1,layout2, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout;
+    private RelativeLayout layout1,layout2/*, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout*/;
     int[] rainbow;
 
-    SQLiteDAOImpl daoImpl;
+    SQLiteDAO daoImpl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,28 +61,32 @@ public class OverviewActivity extends AppCompatActivity {
 
         setTitle("Expense Master");
 
-        layout1 = (RelativeLayout) findViewById(R.id.layout1);
-        layout2 = (RelativeLayout) findViewById(R.id.layout2);
+        layout1 = (RelativeLayout) findViewById(R.id.expense_clickable_layout);
+        layout2 = (RelativeLayout) findViewById(R.id.income_clickable_layout);
 
         rainbow = getApplicationContext().getResources().getIntArray(R.array.rainbow);
+/*
         weekExpenseAmount = (TextView) findViewById(R.id.txt_week_expense_amount);
         dayExpenseAmount = (TextView) findViewById(R.id.txt_day_expense_amount);
         monthExpenseAmount = (TextView) findViewById(R.id.txt_month_expense_amount);
         dayIncomeAmount = (TextView) findViewById(R.id.txt_day_income_amount);
         weekIncomeAmount = (TextView) findViewById(R.id.txt_week_income_amount);
         monthIncomeAmount = (TextView) findViewById(R.id.txt_month_income_amount);
+*/
         exportButton = (Button) findViewById(R.id.btn_get_file);
         getExpenseButton = (Button) findViewById(R.id.btn_get_expense);
         addCategoriesButton = (Button)findViewById(R.id.btn_add_category);
         chartDisplayButton = (Button)findViewById(R.id.btn_get_chart);
+/*
         dayExpenseLayout = (RelativeLayout)findViewById(R.id.day_expense_layout);
         weekExpenseLayout = (RelativeLayout)findViewById(R.id.week_expense_layout);
         monthExpenseLayout = (RelativeLayout)findViewById(R.id.month_expense_layout);
         dayIncomeLayout = (RelativeLayout)findViewById(R.id.day_income_layout);
         weekIncomeLayout = (RelativeLayout)findViewById(R.id.week_income_layout);
         monthIncomeLayout = (RelativeLayout)findViewById(R.id.month_income_layout);
+*/
 
-        daoImpl=new SQLiteDAOImpl(OverviewActivity.this);
+        daoImpl = new ManagementBean().getDAOFactory(getApplicationContext());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +104,14 @@ public class OverviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OnlyExpensesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        layout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), OnlyIncomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -142,7 +142,7 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
-        dayExpenseLayout.setOnClickListener(new View.OnClickListener() {
+        /*dayExpenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ExpenseRecyclerActivity.class);
@@ -195,9 +195,9 @@ public class OverviewActivity extends AppCompatActivity {
                 intent.putExtra("listFlag", "MonthIncomeList");
                 startActivity(intent);
             }
-        });
+        });*/
 
-        loadData();
+        //loadData();
         //piechartdisplay();
 
         exportButton.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +223,7 @@ public class OverviewActivity extends AppCompatActivity {
 
     }
 
-    private void loadData() {
+    /*private void loadData() {
         FirstPageData data = daoImpl.getLoadData();
         dayExpenseAmount.setText(data.getCurrentDayExpense());
         if(data.getCurrentDayExpense() == null){
@@ -249,7 +249,7 @@ public class OverviewActivity extends AppCompatActivity {
         if(data.getCurrentMonthIncome() == null){
             monthIncomeAmount.setText("0");
         }
-    }
+    }*/
 
     /*private void piechartdisplay() {
         pie = (PieChart) findViewById(R.id.mySimplePieChart);
@@ -313,7 +313,7 @@ public class OverviewActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        loadData();
+        //loadData();
         //piechartdisplay();
     }
 
@@ -341,99 +341,71 @@ public class OverviewActivity extends AppCompatActivity {
     }*/
 
     private void saveExcelFile(Context context, String fileName) {
-
         // check if available and not read only
         /*if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
             Log.w("FileUtils", "Storage not available or read only");
             return false;
         }*/
-
         boolean success = false;
-
         //New Workbook
         Workbook wb = new HSSFWorkbook();
-
         Cell c = null;
-
         //Cell style for header row
         CellStyle cs = wb.createCellStyle();
         cs.setFillForegroundColor(HSSFColor.LIME.index);
         cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-
         //New Sheet
         Sheet sheet1 = null;
         sheet1 = wb.createSheet("All Transactions");
-
         // Generate column headings
         Row row = sheet1.createRow(0);
-
         c = row.createCell(0);
         c.setCellValue("Transaction Id");
         c.setCellStyle(cs);
-
         c = row.createCell(1);
         c.setCellValue("Type");
         c.setCellStyle(cs);
-
         c = row.createCell(2);
         c.setCellValue("Category");
         c.setCellStyle(cs);
-
         c = row.createCell(3);
         c.setCellValue("Description");
         c.setCellStyle(cs);
-
         c = row.createCell(4);
         c.setCellValue("Amount");
         c.setCellStyle(cs);
-
         c = row.createCell(5);
         c.setCellValue("Date");
         c.setCellStyle(cs);
-
         sheet1.setColumnWidth(0, (15 * 300));
         sheet1.setColumnWidth(1, (15 * 300));
         sheet1.setColumnWidth(2, (15 * 300));
         sheet1.setColumnWidth(3, (15 * 300));
         sheet1.setColumnWidth(4, (15 * 300));
         sheet1.setColumnWidth(5, (15 * 300));
-
         List<Expense> expenseList = new ArrayList<>();
         expenseList = daoImpl.getAllExpenses();
-
         SimpleDateFormat form = new SimpleDateFormat("dd-MMMM-yyyy");
-
         int i=1;
         for(Expense exp: expenseList ){
             row = sheet1.createRow(i);
-
             c = row.createCell(0);
             c.setCellValue(exp.getId());
-
             c = row.createCell(1);
             c.setCellValue(exp.getType());
-
             c = row.createCell(2);
             c.setCellValue(exp.getCategory());
-
             c = row.createCell(3);
             c.setCellValue(exp.getRemarks());
-
             c = row.createCell(4);
             c.setCellValue(exp.getAmount());
-
-            System.out.println(form.format(exp.getDate()));
             c = row.createCell(5);
             c.setCellValue(form.format(exp.getDate()));
             i+=1;
         }
-
-
-
         // Create a path where we will place our List of objects on external storage
         File file = new File(context.getExternalFilesDir(null).getAbsolutePath(), fileName);
         FileOutputStream os = null;
-
         try {
             os = new FileOutputStream(file);
             wb.write(os);

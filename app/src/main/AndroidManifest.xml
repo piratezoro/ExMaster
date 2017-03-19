@@ -38,8 +38,15 @@
         <activity
             android:name=".ChartsActivity"
             android:parentActivityName=".OverviewActivity" />
-        <activity android:name=".DisplayGraphActivity" />
-        <activity android:name=".OnlyExpensesActivity"></activity>
+        <activity
+            android:name=".DisplayGraphActivity"
+            android:parentActivityName=".OverviewActivity" />
+        <activity
+            android:name=".OnlyExpensesActivity"
+            android:parentActivityName=".OverviewActivity" />
+        <activity
+            android:name=".OnlyIncomeActivity"
+            android:parentActivityName=".OverviewActivity"/>
     </application>
 
 </manifest>

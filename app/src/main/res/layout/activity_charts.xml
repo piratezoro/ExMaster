@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ChartsActivity">
+    tools:context=".ChartsActivity"
+    android:background="#E8E8E8">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,7 +43,6 @@
                     android:layout_height="wrap_content"
                     android:editable="false"
                     android:hint="Select From Date"
-                    android:background="@drawable/rounded_edittext"
                     android:gravity="center_horizontal"/>
 
                 <EditText
@@ -53,7 +53,6 @@
                     android:editable="false"
                     android:hint="Select To Date"
                     android:layout_marginLeft="30dp"
-                    android:background="@drawable/rounded_edittext"
                     android:gravity="center_horizontal"/>
 
             </RelativeLayout>
@@ -65,8 +64,6 @@
                 android:text="Search"
                 android:layout_below="@+id/layout_search"
                 android:layout_centerHorizontal="true"
-                android:background="@color/colorAccent"
-                android:textColor="@color/off_white"
                 android:layout_marginTop="20dp"/>
 
         </RelativeLayout>

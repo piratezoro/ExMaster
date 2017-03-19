@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.expensemaster.Activities.AddExpenseActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:background="#E8E8E8">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -67,11 +68,10 @@
                 <EditText
                     android:id="@+id/txt_category"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:hint="Select Category"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_edittext"
                     android:paddingLeft="10dp"
                     android:layout_below="@+id/category"
                     />
@@ -89,13 +89,12 @@
                 <EditText
                     android:id="@+id/txt_amount"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:hint="Enter Amount"
                     android:textSize="15dp"
                     android:inputType="numberDecimal"
                     android:layout_below="@+id/amount"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_edittext"
                     android:paddingLeft="10dp"/>
 
                 <TextView
@@ -111,12 +110,11 @@
                 <EditText
                     android:id="@+id/txt_remarks"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:hint="Enter Description"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/remarks"
-                    android:background="@drawable/rounded_edittext"
                     android:paddingLeft="10dp"
                     android:nextFocusDown="@+id/txt_date"
                     android:singleLine="true"/>
@@ -134,13 +132,12 @@
                 <EditText
                     android:id="@+id/txt_date"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:hint="Select Date"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/date"
                     android:editable="false"
-                    android:background="@drawable/rounded_edittext"
                     android:paddingLeft="10dp"/>
 
                 <RelativeLayout

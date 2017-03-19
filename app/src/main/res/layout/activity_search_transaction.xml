@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:editable="false"
             android:hint="Select From Date"
-            android:background="@drawable/rounded_edittext"
             android:gravity="center_horizontal"/>
 
         <EditText
@@ -33,7 +32,6 @@
             android:editable="false"
             android:hint="Select To Date"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/rounded_edittext"
             android:gravity="center_horizontal"/>
 
     </RelativeLayout>

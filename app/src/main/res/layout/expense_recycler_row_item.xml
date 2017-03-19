@@ -9,7 +9,7 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:clickable="true"
-    android:background="@drawable/rounded_edittext"
+    android:background="@color/ap_white"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:elevation="3dp">

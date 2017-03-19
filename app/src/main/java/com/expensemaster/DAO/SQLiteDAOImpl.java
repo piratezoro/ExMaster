@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.expensemaster.Bean.Category;
 import com.expensemaster.Bean.Expense;
+import com.expensemaster.Bean.ExpensePage;
 import com.expensemaster.Bean.FirstPageData;
+import com.expensemaster.Bean.IncomePage;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -629,6 +631,153 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
         }
         db.close();
         return categoryList;
+    }
+
+    @Override
+    public ExpensePage getExpenseData() {
+        ExpensePage expensePage = new ExpensePage();
+        try {
+            String startDateOfWeek = "", endDateOfWeek = "", currentDate = "", startDateOfMonth = "", endDateOfMonth = "";
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Calendar c = GregorianCalendar.getInstance();
+            currentDate = df.format(c.getTime());
+            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            startDateOfWeek = df.format(c.getTime());
+            c.add(Calendar.DATE, 6);
+            endDateOfWeek = df.format(c.getTime());
+            c = GregorianCalendar.getInstance();
+            c.set(Calendar.DAY_OF_MONTH,c.getActualMinimum(Calendar.DAY_OF_MONTH));
+            startDateOfMonth = df.format(c.getTime());
+            c.set(Calendar.DAY_OF_MONTH,c.getActualMaximum(Calendar.DAY_OF_MONTH));
+            endDateOfMonth = df.format(c.getTime());
+            System.out.println("Start Date of current week = " + startDateOfWeek);
+            System.out.println("End Date of current week = " + endDateOfWeek);
+            System.out.println("Current date = " + currentDate);
+            System.out.println("Start Date of current month = " + startDateOfMonth);
+            System.out.println("End Date of current month = " + endDateOfMonth);
+
+            String weekExpenseQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Expense' AND date"
+                    +" between '" + startDateOfWeek+"' and '" +endDateOfWeek+ "';";
+
+            System.out.println(weekExpenseQuery);
+            Cursor cursor1= db.rawQuery(weekExpenseQuery, null);
+            if (cursor1.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor1.getString(cursor1.getColumnIndex("SUM_AMT")));
+                    expensePage.setCurrentWeekExpense(cursor1.getString(cursor1.getColumnIndex("SUM_AMT")));
+                }while(cursor1.moveToNext());
+            }
+
+            String dayExpenseQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Expense' AND date = '"
+                    + currentDate +"';";
+            System.out.println(dayExpenseQuery);
+            Cursor cursor4= db.rawQuery(dayExpenseQuery, null);
+            if (cursor4.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor4.getString(cursor4.getColumnIndex("SUM_AMT")));
+                    expensePage.setCurrentDayExpense(cursor4.getString(cursor4.getColumnIndex("SUM_AMT")));
+                }while(cursor4.moveToNext());
+            }
+
+            String monthExpenseQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Expense' AND date"
+                    +" between '" + startDateOfMonth+"' and '" +endDateOfMonth+ "';";
+            System.out.println(monthExpenseQuery);
+            Cursor cursor5= db.rawQuery(monthExpenseQuery, null);
+            if (cursor5.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor5.getString(cursor5.getColumnIndex("SUM_AMT")));
+                    expensePage.setCurrentMonthExpense(cursor5.getString(cursor5.getColumnIndex("SUM_AMT")));
+                }while(cursor5.moveToNext());
+            }
+
+            db.close();
+            return expensePage;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public IncomePage getIncomeData() {
+        IncomePage incomePage = new IncomePage();
+        try {
+            String startDateOfWeek = "", endDateOfWeek = "", currentDate = "", startDateOfMonth = "", endDateOfMonth = "";
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Calendar c = GregorianCalendar.getInstance();
+            currentDate = df.format(c.getTime());
+            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            startDateOfWeek = df.format(c.getTime());
+            c.add(Calendar.DATE, 6);
+            endDateOfWeek = df.format(c.getTime());
+            c = GregorianCalendar.getInstance();
+            c.set(Calendar.DAY_OF_MONTH,c.getActualMinimum(Calendar.DAY_OF_MONTH));
+            startDateOfMonth = df.format(c.getTime());
+            c.set(Calendar.DAY_OF_MONTH,c.getActualMaximum(Calendar.DAY_OF_MONTH));
+            endDateOfMonth = df.format(c.getTime());
+            System.out.println("Start Date of current week = " + startDateOfWeek);
+            System.out.println("End Date of current week = " + endDateOfWeek);
+            System.out.println("Current date = " + currentDate);
+            System.out.println("Start Date of current month = " + startDateOfMonth);
+            System.out.println("End Date of current month = " + endDateOfMonth);
+
+            String weekIncomeQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Income' AND date"
+                    +" between '" + startDateOfWeek+"' and '" +endDateOfWeek+ "';";
+            System.out.println(weekIncomeQuery);
+            Cursor cursor2= db.rawQuery(weekIncomeQuery, null);
+            if (cursor2.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor2.getString(cursor2.getColumnIndex("SUM_AMT")));
+                    incomePage.setCurrentWeekIncome(cursor2.getString(cursor2.getColumnIndex("SUM_AMT")));
+                }while(cursor2.moveToNext());
+            }
+
+            String dayIncomeQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Income' AND date = '"
+                    + currentDate +"';";
+            System.out.println(dayIncomeQuery);
+            Cursor cursor3= db.rawQuery(dayIncomeQuery, null);
+            if (cursor3.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor3.getString(cursor3.getColumnIndex("SUM_AMT")));
+                    incomePage.setCurrentDayIncome(cursor3.getString(cursor3.getColumnIndex("SUM_AMT")));
+                }while(cursor3.moveToNext());
+            }
+
+            String monthIncomeQuery= "SELECT SUM("+amount+") AS SUM_AMT FROM "+ EXPENSE_TABLE_NAME+" WHERE "+ type +" = 'Income' AND date"
+                    +" between '" + startDateOfMonth+"' and '" +endDateOfMonth+ "';";
+            System.out.println(monthIncomeQuery);
+            Cursor cursor6= db.rawQuery(monthIncomeQuery, null);
+            if (cursor6.moveToFirst())
+            {
+                do
+                {
+                    System.out.println(cursor6.getString(cursor6.getColumnIndex("SUM_AMT")));
+                    incomePage.setCurrentMonthIncome(cursor6.getString(cursor6.getColumnIndex("SUM_AMT")));
+                }while(cursor6.moveToNext());
+            }
+
+            db.close();
+            return incomePage;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

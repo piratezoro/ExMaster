@@ -7,7 +7,8 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.expensemaster.Activities.ExpenseRecyclerActivity">
+    tools:context="com.expensemaster.Activities.ExpenseRecyclerActivity"
+    android:background="#E8E8E8">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

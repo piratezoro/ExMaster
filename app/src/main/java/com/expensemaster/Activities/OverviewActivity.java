@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.expensemaster.Bean.Expense;
 import com.expensemaster.DAO.SQLiteDAO;
-import com.expensemaster.DAO.SQLiteDAOImpl;
 import com.expensemaster.Management.ManagementBean;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -46,8 +45,8 @@ public class OverviewActivity extends AppCompatActivity {
 
     //private PieChart pie;
     /*private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount, dayIncomeAmount, weekIncomeAmount, monthIncomeAmount;*/
-    private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
-    private RelativeLayout layout1,layout2/*, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout*/;
+    //private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
+    private RelativeLayout expenseLayout, incomeLayout, dashboardLayout, categoryLayout, allTransactionsLayout, exportLayout/*, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout*/;
     int[] rainbow;
 
     SQLiteDAO daoImpl;
@@ -61,8 +60,13 @@ public class OverviewActivity extends AppCompatActivity {
 
         setTitle("Expense Master");
 
-        layout1 = (RelativeLayout) findViewById(R.id.expense_clickable_layout);
-        layout2 = (RelativeLayout) findViewById(R.id.income_clickable_layout);
+        expenseLayout = (RelativeLayout) findViewById(R.id.expense_clickable_layout);
+        incomeLayout = (RelativeLayout) findViewById(R.id.income_clickable_layout);
+        dashboardLayout = (RelativeLayout) findViewById(R.id.dashboard_clickable_layout);
+        categoryLayout = (RelativeLayout) findViewById(R.id.category_clickable_layout);
+        allTransactionsLayout = (RelativeLayout) findViewById(R.id.all_transactions_clickable_layout);
+        exportLayout = (RelativeLayout) findViewById(R.id.export_clickable_layout);
+
 
         rainbow = getApplicationContext().getResources().getIntArray(R.array.rainbow);
 /*
@@ -73,10 +77,10 @@ public class OverviewActivity extends AppCompatActivity {
         weekIncomeAmount = (TextView) findViewById(R.id.txt_week_income_amount);
         monthIncomeAmount = (TextView) findViewById(R.id.txt_month_income_amount);
 */
-        exportButton = (Button) findViewById(R.id.btn_get_file);
+/*        exportButton = (Button) findViewById(R.id.btn_get_file);
         getExpenseButton = (Button) findViewById(R.id.btn_get_expense);
         addCategoriesButton = (Button)findViewById(R.id.btn_add_category);
-        chartDisplayButton = (Button)findViewById(R.id.btn_get_chart);
+        chartDisplayButton = (Button)findViewById(R.id.btn_get_chart);*/
 /*
         dayExpenseLayout = (RelativeLayout)findViewById(R.id.day_expense_layout);
         weekExpenseLayout = (RelativeLayout)findViewById(R.id.week_expense_layout);
@@ -100,7 +104,7 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
-        layout1.setOnClickListener(new View.OnClickListener() {
+        expenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OnlyExpensesActivity.class);
@@ -108,7 +112,7 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
-        layout2.setOnClickListener(new View.OnClickListener() {
+        incomeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OnlyIncomeActivity.class);
@@ -116,7 +120,7 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
-        chartDisplayButton.setOnClickListener(new View.OnClickListener() {
+        dashboardLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChartsActivity.class);
@@ -124,7 +128,68 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
-        getExpenseButton.setOnClickListener(new View.OnClickListener() {
+        categoryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CategoriesListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        allTransactionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ExpenseRecyclerActivity.class);
+                intent.putExtra("listFlag", "AllTransactionsList");
+                startActivity(intent);
+            }
+        });
+
+        exportLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(OverviewActivity.this);
+                builder2.setTitle("File Export");
+                builder2.setMessage("Do you want to export records in excel sheet?");
+                builder2.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        Calendar c = GregorianCalendar.getInstance();
+                        saveExcelFile(getApplicationContext(), "ExpenseMaster" + df.format(c.getTime()) + ".xlsx");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OverviewActivity.this);
+                        builder.setTitle("File exported successfully!");
+                        builder.setMessage("File directory is : " + getApplicationContext().getExternalFilesDir(null).getAbsolutePath());
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        Toast.makeText(getApplicationContext(), "File exported successfully!", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder2.create().show();
+            }
+        });
+
+        /*chartDisplayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChartsActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
+        /*getExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //String expense=daoImpl.getAllExpenses().toString();
@@ -132,15 +197,15 @@ public class OverviewActivity extends AppCompatActivity {
                 intent.putExtra("listFlag", "AllTransactionsList");
                 startActivity(intent);
             }
-        });
+        });*/
 
-        addCategoriesButton.setOnClickListener(new View.OnClickListener() {
+        /*addCategoriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CategoriesListActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         /*dayExpenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +265,7 @@ public class OverviewActivity extends AppCompatActivity {
         //loadData();
         //piechartdisplay();
 
-        exportButton.setOnClickListener(new View.OnClickListener() {
+        /*exportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -219,7 +284,7 @@ public class OverviewActivity extends AppCompatActivity {
                 alert.show();
                 Toast.makeText(getApplicationContext(),"File exported successfully!",Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
     }
 

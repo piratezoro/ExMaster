@@ -23,7 +23,7 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/day_expense_card"
+                android:id="@+id/expense_card"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -50,12 +50,12 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card1"
+                android:id="@+id/income_card"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:elevation="50dp"
-                android:layout_below="@+id/day_expense_card"
+                android:layout_below="@+id/expense_card"
                 android:layout_marginTop="10dp"
                 android:background="@color/ap_white">
 
@@ -74,7 +74,157 @@
                         android:paddingLeft="10dp"/>
 
                 </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/quotes_card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/income_card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/quotes_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/txt_quote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quote"
+                        android:elevation="10dp"
+                        android:paddingLeft="10dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_quote_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quote By"
+                        android:elevation="10dp"
+                        android:paddingRight="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/txt_quote"
+                        android:layout_marginTop="20dp"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/dashboard_card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/quotes_card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/dashboard_clickable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txt_dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="My Dashboard"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/category_card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/dashboard_card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/category_clickable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txt_cat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Add Categories"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/all_transactions_card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/category_card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/all_transactions_clickable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txt_all_transactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="View Transactions"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/export_card"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:elevation="50dp"
+                android:layout_below="@+id/all_transactions_card"
+                android:layout_marginTop="10dp"
+                android:background="@color/ap_white">
+
+                <RelativeLayout
+                    android:id="@+id/export_clickable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txt_export"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Export in File"
+                        android:elevation="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"/>
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
 
 
@@ -82,17 +232,18 @@
 
     </ScrollView>
 
+<!--
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:layout_marginTop="160dp">
+        android:layout_marginTop="400dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--<RelativeLayout
+            &lt;!&ndash;<RelativeLayout
                 android:id="@+id/expense_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,9 +324,9 @@
                         android:textColor="@color/ap_white"/>
                 </RelativeLayout>
 
-            </RelativeLayout>-->
+            </RelativeLayout>&ndash;&gt;
 
-            <!--<RelativeLayout
+            &lt;!&ndash;<RelativeLayout
                 android:id="@+id/income_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,7 +409,7 @@
                         android:textColor="@color/ap_white"/>
                 </RelativeLayout>
 
-            </RelativeLayout>-->
+            </RelativeLayout>&ndash;&gt;
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -363,6 +514,7 @@
 
         </RelativeLayout>
     </ScrollView>
+-->
 
 
 </RelativeLayout>

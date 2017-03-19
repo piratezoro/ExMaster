@@ -61,6 +61,8 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
                 +category +" TEXT);";
         db.execSQL(categoriesTableQuery);
         System.out.println("11111111111111111111111111" + categoriesTableQuery);
+
+
     }
 
     @Override

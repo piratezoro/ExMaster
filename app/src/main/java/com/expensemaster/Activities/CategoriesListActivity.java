@@ -1,10 +1,15 @@
 package com.expensemaster.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -23,7 +28,9 @@ import android.widget.Toast;
 import com.expensemaster.Bean.Expense;
 import com.expensemaster.DAO.SQLiteDAOImpl;
 import com.expensemaster.Supporting.CategoriesListViewAdapter;
+import com.expensemaster.Supporting.DividerItemDecoration;
 import com.expensemaster.Supporting.ExpenseListViewAdapter;
+import com.expensemaster.Supporting.ExpenseRecyclerViewAdapter;
 import com.expensemaster.Supporting.Validator;
 
 import java.util.List;
@@ -87,17 +94,41 @@ public class CategoriesListActivity extends AppCompatActivity {
             }
         });
 
-        /*listCategories.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CategoriesListActivity.this, android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Delete");
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(CategoriesListActivity.this);
+        builder1.setTitle("Options");
+        builder1.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder1.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String item = arrayAdapter.getItem(which);
+                if (item.equalsIgnoreCase("Delete")) {
+                    categoriesList = daoImpl.deleteCategory(longClickedCategoryItem);
+                    CategoriesListViewAdapter expenseListViewAdapter = new CategoriesListViewAdapter(getApplication(), categoriesList);
+                    listCategories.setAdapter(expenseListViewAdapter);
+                }
+            }
+        });
+
+        listCategories.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 longClickedCategoryItem = (String) listCategories.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(), longClickedCategoryItem, Toast.LENGTH_SHORT).show();
-                lpw.show();
+                builder1.create().show();
                 return true;
             }
-        });*/
+        });
 
-        listCategories.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        /*listCategories.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listCategories.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
@@ -148,7 +179,7 @@ public class CategoriesListActivity extends AppCompatActivity {
             public void onDestroyActionMode(ActionMode mode) {
                 categoriesListViewAdapter.removeSelection();
             }
-        });
+        });*/
 
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,9 +197,5 @@ public class CategoriesListActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void deleteCategory(){
-
     }
 }

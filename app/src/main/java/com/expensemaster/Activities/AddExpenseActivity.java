@@ -1,6 +1,8 @@
 package com.expensemaster.Activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -105,11 +107,37 @@ public class AddExpenseActivity extends AppCompatActivity {
             }
         });
 
+
+        AlertDialog.Builder builder =  new AlertDialog.Builder(AddExpenseActivity.this);
+        builder.setTitle("Alert!");
+        builder.setMessage("Please add Categories first");
+        builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), CategoriesListActivity.class);
+                startActivity(intent);
+            }
+        });
+        final AlertDialog alert = builder.create();
+
         txtCategory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    lpw.show();
+                    System.out.println("setOnFocusChangeListener:"+categoriesList.isEmpty());
+                    if(categoriesList.isEmpty()){
+                        alert.show();
+                    }
+                    else {
+                        lpw.show();
+                    }
+
                 }
             }
         });
@@ -120,7 +148,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         txtCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lpw.show();
+                System.out.println("setOnClickListener:" + categoriesList.isEmpty());
+                if(categoriesList.isEmpty()){
+                    alert.show();
+                }
+                else {
+                    lpw.show();
+                }
             }
         });
 
@@ -128,7 +162,13 @@ public class AddExpenseActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
-                lpw.show();
+                System.out.println("setOnTouchListener:" + categoriesList.isEmpty());
+                if(categoriesList.isEmpty()){
+                    alert.show();
+                }
+                else {
+                    lpw.show();
+                }
                 return true;
                 /*if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getX() >= (v.getWidth() - ((EditText) v)

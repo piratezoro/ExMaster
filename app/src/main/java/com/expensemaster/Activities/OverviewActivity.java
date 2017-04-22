@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.expensemaster.Bean.Expense;
+import com.expensemaster.Bean.Quote;
 import com.expensemaster.DAO.SQLiteDAO;
 import com.expensemaster.Management.ManagementBean;
 
@@ -37,6 +40,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -48,8 +52,9 @@ public class OverviewActivity extends AppCompatActivity {
     //private Button getExpenseButton, addCategoriesButton, exportButton, chartDisplayButton;
     private RelativeLayout expenseLayout, incomeLayout, dashboardLayout, categoryLayout, allTransactionsLayout, exportLayout/*, dayExpenseLayout, weekExpenseLayout, monthExpenseLayout, dayIncomeLayout, weekIncomeLayout, monthIncomeLayout*/;
     int[] rainbow;
-
+    Button btnquoto;
     SQLiteDAO daoImpl;
+    private TextView quote,quotecreatedby;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +71,17 @@ public class OverviewActivity extends AppCompatActivity {
         categoryLayout = (RelativeLayout) findViewById(R.id.category_clickable_layout);
         allTransactionsLayout = (RelativeLayout) findViewById(R.id.all_transactions_clickable_layout);
         exportLayout = (RelativeLayout) findViewById(R.id.export_clickable_layout);
-
+        btnquoto = (Button) findViewById(R.id.quotesbt);
 
         rainbow = getApplicationContext().getResources().getIntArray(R.array.rainbow);
+        Typeface quote_font = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
+        Typeface author_font = Typeface.createFromAsset(getAssets(), "fonts/Oswald-RegularItalic.ttf");
+
+        quote=(TextView) findViewById(R.id.txt_quote);
+        quotecreatedby=(TextView) findViewById(R.id.txt_quote_by);
+
+        quote.setTypeface(quote_font);
+        quotecreatedby.setTypeface(author_font);
 /*
         weekExpenseAmount = (TextView) findViewById(R.id.txt_week_expense_amount);
         dayExpenseAmount = (TextView) findViewById(R.id.txt_day_expense_amount);
@@ -92,6 +105,23 @@ public class OverviewActivity extends AppCompatActivity {
 
         daoImpl = new ManagementBean().getDAOFactory(getApplicationContext());
 
+        Quote data=new Quote();
+
+        Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.DATE);
+        //System.out.println("month  ka date hai bhaya:"+month);
+        data=daoImpl.gettodayQuote(month);
+        System.out.println("aaj ka date bhaya"+month);
+        System.out.println("aaj ka quote bhaya"+data.getQuote());
+        System.out.println("quote ka sutrdhar bhaya"+data.getAuthorname());
+
+
+        quote.setText(data.getQuote());
+        quotecreatedby.setText(data.getAuthorname());
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +134,13 @@ public class OverviewActivity extends AppCompatActivity {
             }
         });
 
+        btnquoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quotecreation();
+                System.out.println("tere mere bech me kya hai");
+            }
+        });
         expenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -487,5 +524,32 @@ public class OverviewActivity extends AppCompatActivity {
             } catch (Exception ex) {
             }
         }
+    }
+
+    public void quotecreation()
+    {
+
+       /* List<Quote> quotoList = new ArrayList<>();
+        quotoList = daoImpl.getQuotes();
+        for(Quote element : quotoList)
+        {
+            System.out.println(element.getId()+element.getQuote()+element.getAuthorname());
+
+        }*/
+
+        Quote data=new Quote();
+
+        Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.DATE);
+        //System.out.println("month  ka date hai bhaya:"+month);
+        data=daoImpl.gettodayQuote(month);
+        System.out.println("aaj ka date bhaya"+month);
+        System.out.println("aaj ka quote bhaya"+data.getQuote());
+        System.out.println("quote ka sutrdhar bhaya"+data.getAuthorname());
+
+
+
     }
 }

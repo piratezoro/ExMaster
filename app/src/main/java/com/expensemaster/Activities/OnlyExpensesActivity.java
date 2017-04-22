@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.expensemaster.Bean.Category;
 import com.expensemaster.Bean.ExpensePage;
 import com.expensemaster.DAO.SQLiteDAO;
 import com.expensemaster.Management.ManagementBean;
+import com.expensemaster.Supporting.CategoriesAmountListViewAdapter;
+
+import java.util.List;
 
 public class OnlyExpensesActivity extends AppCompatActivity {
 
     private SQLiteDAO daoImpl;
     private TextView dayExpenseAmount, weekExpenseAmount, monthExpenseAmount;
     private RelativeLayout dayExpenseLayout, weekExpenseLayout, monthExpenseLayout;
+    ListView listCategoriesAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class OnlyExpensesActivity extends AppCompatActivity {
         dayExpenseLayout = (RelativeLayout)findViewById(R.id.day_expense_layout);
         weekExpenseLayout = (RelativeLayout)findViewById(R.id.week_expense_layout);
         monthExpenseLayout = (RelativeLayout)findViewById(R.id.month_expense_layout);
+        listCategoriesAmount = (ListView) findViewById(R.id.all_categories_amount_list);
         daoImpl = new ManagementBean().getDAOFactory(getApplicationContext());
 
         loadData();
@@ -75,5 +82,9 @@ public class OnlyExpensesActivity extends AppCompatActivity {
         if(data.getCurrentMonthExpense() == null){
             monthExpenseAmount.setText("0");
         }
+
+        List<Category> categoriesAmountList = daoImpl.getCategorywiseExpense();
+        final CategoriesAmountListViewAdapter categoriesListViewAdapter = new CategoriesAmountListViewAdapter(getApplication(), categoriesAmountList);
+        listCategoriesAmount.setAdapter(categoriesListViewAdapter);
     }
 }

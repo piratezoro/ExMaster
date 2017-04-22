@@ -5,6 +5,7 @@ import com.expensemaster.Bean.Expense;
 import com.expensemaster.Bean.ExpensePage;
 import com.expensemaster.Bean.FirstPageData;
 import com.expensemaster.Bean.IncomePage;
+import com.expensemaster.Bean.Quote;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,9 @@ public interface SQLiteDAO {
     public List<String> deleteCategory(String cat);
     public List<Expense> searchTransactions(String from, String to);
     public List<Category> getExpense(String from, String to);
+    public List<Quote> getQuotes();
+    public Quote gettodayQuote(int date);
+
     public ExpensePage getExpenseData();
     public IncomePage getIncomeData();
 

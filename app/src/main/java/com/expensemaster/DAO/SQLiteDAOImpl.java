@@ -10,6 +10,7 @@ import com.expensemaster.Bean.Expense;
 import com.expensemaster.Bean.ExpensePage;
 import com.expensemaster.Bean.FirstPageData;
 import com.expensemaster.Bean.IncomePage;
+import com.expensemaster.Bean.Quote;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -29,6 +30,8 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
     private static final String DATABASE_NAME = "ExpenseMaster";
     private static final String EXPENSE_TABLE_NAME = "Expense";
     private static final String CATEGORIES_TABLE_NAME = "Categories";
+    private static final String QUOTES_TABLE_NAME = "Quotes";
+
     private static final int DATABASE_VERSION = 1;
 
     private static final String key_id = "Id";
@@ -37,6 +40,8 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
     private static final String remarks = "Remarks";
     private static final String date = "Date";
     private static final String type = "Type";
+    private static final String quotes = "Quotes";
+    private static final String authorname = "Name";
 
     final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -62,6 +67,15 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
         db.execSQL(categoriesTableQuery);
         System.out.println("11111111111111111111111111" + categoriesTableQuery);
 
+        String QuotesTableQuery = "CREATE TABLE " + QUOTES_TABLE_NAME +
+                " ("+key_id +" INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +quotes +" TEXT,"+authorname+" TEXT);";
+        db.execSQL(QuotesTableQuery);
+        insertquotes(db);
+
+
+
+        System.out.println("11111111111111111111111111" + QuotesTableQuery);
 
     }
 
@@ -506,7 +520,7 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
                 Expense exp = new Expense();
                 exp.setId(cursor.getInt(0));
                 System.out.println("11111111111111111" + cursor.getInt(0));
-                System.out.println("22222222222222222222222222"+exp.getId());
+                System.out.println("22222222222222222222222222" + exp.getId());
                 exp.setCategory(cursor.getString(1));
                 exp.setAmount(cursor.getFloat(2));
                 exp.setRemarks(cursor.getString(3));
@@ -604,7 +618,7 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
                 }
                 exp.setType(cursor.getString(5));
                 expenses.add(exp);
-                System.out.println(exp.getDate()+" - "+exp.getAmount());
+                System.out.println(exp.getDate() + " - " + exp.getAmount());
             }while(cursor.moveToNext());
         }
         db.close();
@@ -782,4 +796,191 @@ public class SQLiteDAOImpl extends android.database.sqlite.SQLiteOpenHelper impl
         return null;
     }
 
+    @Override
+    public List<Quote> getQuotes()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Quote> quotes=new ArrayList<Quote>();
+        String selectquery= "SELECT * FROM "+ QUOTES_TABLE_NAME+";";
+        Cursor cursor= db.rawQuery(selectquery, null);
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Quote quote = new Quote();
+                quote.setId(cursor.getInt(0));
+                quote.setQuote(cursor.getString(1));
+                quote.setAuthorname(cursor.getString(2));
+
+
+
+                quotes.add(quote);
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return  quotes;
+    }
+
+    @Override
+    public Quote gettodayQuote(int date)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Quote quote = new Quote();
+        String selectquery= "SELECT * FROM "+ QUOTES_TABLE_NAME+ " WHERE Id ="+date+";";
+        Cursor cursor= db.rawQuery(selectquery, null);
+
+       if (cursor.moveToFirst())
+        {
+            do
+            {
+
+                quote.setId(cursor.getInt(0));
+                quote.setQuote(cursor.getString(1));
+                quote.setAuthorname(cursor.getString(2));
+
+
+
+
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return  quote;
+    }
+
+    public void insertquotes(SQLiteDatabase db)
+    {
+
+        try {
+            ContentValues values = new ContentValues();
+            System.out.println("After Insert quotes hahaha");
+            values.put(quotes, "Every time you borrow money, you're robbing your future self.");
+            values.put(authorname, "--N. W. Morris");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Never spend your money before you have it.");
+            values.put(authorname, "--T. Jefferson");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Wealth is not his that has it, but his that enjoys it.");
+            values.put(authorname, "--Benjamin Franklin");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Don't tell me what you value, show me your budget, and I'll tell you what you value.");
+            values.put(authorname, "--Joe Biden");
+            db.insert("Quotes", null, values);
+//5
+            values.put(quotes, "If you live for having it all, what you have is never enough.");
+            values.put(authorname, "--Vicki Robin");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "We make a living by what we get, but we make a life by what we give.");
+            values.put(authorname, "--Winston Churchill");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Not everything that can be counted counts, and not everything that counts can be counted.");
+            values.put(authorname, "--Albert Einstein");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Screw it, Let''s do it!");
+            values.put(authorname, "--Richard Branson");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "If plan A fails, remember there are 25 more letters.");
+            values.put(authorname, "--Chris Guillebeau");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Believe you can and youâ€™re halfway there.");
+            values.put(authorname, "--Theodore Roosevelt");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "If we command our wealth, we shall be rich and free. If our wealth commands us, we are poor indeed.");
+            values.put(authorname, "--Edmund Burke");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "No wealth can ever make a bad man at peace with himself.");
+            values.put(authorname, "--Plato");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "I'd like to live as a poor man with lots of money.");
+            values.put(authorname, "--Pablo Picasso");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "You can be young without money, but you can't be old without it.");
+            values.put(authorname, "--Tennessee Williams");
+            db.insert("Quotes", null, values);
+//15
+            values.put(quotes, "The best thing money can buy is financial freedom.");
+            values.put(authorname, "--Ankit");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Rule No 1: Never lose money.Rule No 2: Never forget rule No 1 ");
+            values.put(authorname, "--Warren Buffett");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Wealth is the ability to fully experience life.");
+            values.put(authorname, "--Henry David Thoreau");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "When I had money everyone called me brother.");
+            values.put(authorname, "--Polish proverb");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Know what you own, and know why you own it.");
+            values.put(authorname, "--Plato");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Money often costs too much.");
+            values.put(authorname, "--Ralph Waldo Emerson");
+            db.insert("Quotes", null, values);
+
+
+            values.put(quotes, "An investment in knowledge pays the best interest");
+            values.put(authorname, "--Benjamin Franklin");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "You try to be greedy when others are fearful. And you try to be fearful when others are greedy.");
+            values.put(authorname, "--Warren Buffett");
+            db.insert("Quotes", null, values);
+//23
+            values.put(quotes, "Believe you can and you’re halfway there.");
+            values.put(authorname, "--Theodore Roosevelt");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "When buying shares, ask yourself, would you buy the whole company?");
+            values.put(authorname, "--Rene Rivkin");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Fortune sides with him who dares. ");
+            values.put(authorname, "--Virgil");
+            db.insert("Quotes", null, values);
+//26
+            values.put(quotes, "Every time you borrow money, you're robbing your future self.");
+            values.put(authorname, "--N. W. Morris");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Never spend your money before you have it.");
+            values.put(authorname, "--T. Jefferson");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Wealth is not his that has it, but his that enjoys it.");
+            values.put(authorname, "--Benjamin Franklin");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "Don't tell me what you value, show me your budget, and I'll tell you what you value.");
+            values.put(authorname, "--Joe Biden");
+            db.insert("Quotes", null, values);
+
+            values.put(quotes, "If you live for having it all, what you have is never enough.");
+            values.put(authorname, "--Vicki Robin");
+            db.insert("Quotes", null, values);
+
+            System.out.println("After Insert hua re chutyo");
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+        }
+    }
 }

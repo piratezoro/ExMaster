@@ -85,13 +85,16 @@
                 android:elevation="50dp"
                 android:layout_below="@+id/income_card"
                 android:layout_marginTop="10dp"
-                android:background="@color/ap_white">
+                android:background="@color/Orange"
+                >
 
                 <RelativeLayout
                     android:id="@+id/quotes_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:background="@color/Orange"
+                    >
 
                     <TextView
                         android:id="@+id/txt_quote"
@@ -99,7 +102,8 @@
                         android:layout_height="wrap_content"
                         android:text="Quote"
                         android:elevation="10dp"
-                        android:paddingLeft="10dp"/>
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/ap_white"/>
 
                     <TextView
                         android:id="@+id/txt_quote_by"
@@ -110,7 +114,8 @@
                         android:paddingRight="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/txt_quote"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/ap_white"/>
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -227,6 +232,14 @@
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
+            <Button
+                android:id="@+id/quotesbt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quotes"
+                android:layout_below="@+id/export_card"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"/>
 
         </RelativeLayout>
 

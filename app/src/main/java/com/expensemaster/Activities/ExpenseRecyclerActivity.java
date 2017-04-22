@@ -36,6 +36,7 @@ public class ExpenseRecyclerActivity extends AppCompatActivity{
     int deleteID;
     Expense expense;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
+    String listFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,39 +48,14 @@ public class ExpenseRecyclerActivity extends AppCompatActivity{
 
         daoImpl=new SQLiteDAOImpl(ExpenseRecyclerActivity.this);
         Intent intent = getIntent();
-        String listFlag = intent.getStringExtra("listFlag");
-        if(listFlag.equalsIgnoreCase("AllTransactionsList")){
-            setTitle("All Transactions");
-            expenseList = daoImpl.getAllExpenses();
-        }else if(listFlag.equalsIgnoreCase("DayExpenseList")){
-            setTitle("Today's Expenses");
-            expenseList = daoImpl.getDayExpenses();
-        }else if(listFlag.equalsIgnoreCase("WeekExpenseList")){
-            setTitle("Week's Expenses");
-            expenseList = daoImpl.getWeekExpenses();
-        }else if(listFlag.equalsIgnoreCase("MonthExpenseList")){
-            setTitle("Month's Expenses");
-            expenseList = daoImpl.getMonthExpenses();
-        }else if(listFlag.equalsIgnoreCase("DayIncomeList")){
-            setTitle("Today's Income");
-            expenseList = daoImpl.getDayIncome();
-        }else if(listFlag.equalsIgnoreCase("WeekIncomeList")){
-            setTitle("Week's Income");
-            expenseList = daoImpl.getWeekIncome();
-        }else if(listFlag.equalsIgnoreCase("MonthIncomeList")){
-            setTitle("Month's Income");
-            expenseList = daoImpl.getMonthIncome();
-        }
+        listFlag = intent.getStringExtra("listFlag");
+        chooseContent();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
 
-        mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+
+        changeDataInRecycler();
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ExpenseRecyclerActivity.this, android.R.layout.select_dialog_singlechoice);
         arrayAdapter.add("Delete");
@@ -103,13 +79,9 @@ public class ExpenseRecyclerActivity extends AppCompatActivity{
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             expenseList = daoImpl.deleteExpense(deleteID);
-                            mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
-                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                            recyclerView.setLayoutManager(mLayoutManager);
-                            recyclerView.setItemAnimator(new DefaultItemAnimator());
-                            recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
-                            recyclerView.setAdapter(mAdapter);
-                            mAdapter.notifyDataSetChanged();
+                            chooseContent();
+                            changeDataInRecycler();
+
                         }
                     });
                     builderInner.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -231,5 +203,51 @@ public class ExpenseRecyclerActivity extends AppCompatActivity{
                 //mAdapter.toggleSelection(position);
             }
         }));
+    }
+
+    private void changeDataInRecycler() {
+        mAdapter = new ExpenseRecyclerViewAdapter(expenseList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void chooseContent() {
+        if(listFlag.equalsIgnoreCase("AllTransactionsList")){
+            setTitle("All Transactions");
+            expenseList = daoImpl.getAllExpenses();
+        }else if(listFlag.equalsIgnoreCase("DayExpenseList")){
+            setTitle("Today's Expenses");
+            expenseList = daoImpl.getDayExpenses();
+        }else if(listFlag.equalsIgnoreCase("WeekExpenseList")){
+            setTitle("Week's Expenses");
+            expenseList = daoImpl.getWeekExpenses();
+        }else if(listFlag.equalsIgnoreCase("MonthExpenseList")){
+            setTitle("Month's Expenses");
+            expenseList = daoImpl.getMonthExpenses();
+        }else if(listFlag.equalsIgnoreCase("DayIncomeList")){
+            setTitle("Today's Income");
+            expenseList = daoImpl.getDayIncome();
+        }else if(listFlag.equalsIgnoreCase("WeekIncomeList")){
+            setTitle("Week's Income");
+            expenseList = daoImpl.getWeekIncome();
+        }else if(listFlag.equalsIgnoreCase("MonthIncomeList")){
+            setTitle("Month's Income");
+            expenseList = daoImpl.getMonthIncome();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

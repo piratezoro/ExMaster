@@ -10,63 +10,61 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ChartsActivity">
 
-    <com.androidplot.pie.PieChart
-        android:id="@+id/mySimplePieChart"
-        android:layout_width="fill_parent"
-        android:layout_height="350dp"
-        android:layout_weight="1"
-        androidPlot.title.text="Pie Chart"
-        android:layout_marginTop="40dp"
-        />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-    <RelativeLayout
-        android:id="@+id/layout_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/mySimplePieChart"
-        android:layout_marginLeft="15dp"
-        >
-
-        <EditText
-            android:id="@+id/txt_from"
-            android:layout_width="100dp"
-            android:layout_height="18dp"
-            android:editable="false"
-            android:hint="From Date"
-            android:background="@drawable/rounded_edittext"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            />
-
-        <EditText
-            android:id="@+id/txt_to"
-            android:layout_width="100dp"
-            android:layout_height="18dp"
-            android:layout_toRightOf="@+id/txt_from"
-            android:editable="false"
-            android:hint="To Date"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/rounded_edittext"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-
-            />
-        <Button
-            android:id="@+id/btn_search"
+        <RelativeLayout
+            android:id="@+id/layout_search"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:text="   GO   "
-            android:background="@color/colorAccent"
-            android:textColor="@color/off_white"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="270dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/mySimplePieChart"
+            android:layout_marginLeft="15dp">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/txt_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:hint="From Date"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="40dp"/>
 
+            <EditText
+                android:id="@+id/txt_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/txt_from"
+                android:editable="false"
+                android:hint="To Date"
+                android:layout_marginLeft="25dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="40dp"/>
 
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GO"
+                android:textColor="@color/off_white"
+                android:background="@color/Orange"
+                android:layout_marginTop="40dp"
+                android:layout_toRightOf="@+id/txt_to"
+                android:layout_alignBaseline="@+id/txt_to"
+                android:layout_marginLeft="20dp"/>
+
+            <com.androidplot.pie.PieChart
+                android:id="@+id/mySimplePieChart"
+                android:layout_width="fill_parent"
+                android:layout_height="350dp"
+                android:layout_weight="1"
+                androidPlot.title.text="Pie Chart"
+                android:layout_marginTop="40dp"
+                android:layout_below="@+id/txt_from"/>
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

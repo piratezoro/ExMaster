@@ -18,7 +18,6 @@
             android:id="@+id/income_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:elevation="5dp">
 
             <android.support.v7.widget.CardView
@@ -95,7 +94,7 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/month_expense_card"
+                android:id="@+id/month_income_card"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -129,6 +128,70 @@
                         android:paddingRight="10dp"/>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/month_income_card">
+
+                <TextView
+                    android:id="@+id/txt_balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Balance"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/txt_income_for_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_balance"
+                    android:layout_marginTop="10dp"
+                    android:text="This month's Income"/>
+
+                <TextView
+                    android:id="@+id/txt_income_amount_for_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txt_income_for_balance"
+                    android:layout_alignParentRight="true"
+                    android:text="Income"/>
+
+                <TextView
+                    android:id="@+id/txt_expense_for_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_income_for_balance"
+                    android:layout_marginTop="10dp"
+                    android:text="This month's Expense"/>
+
+                <TextView
+                    android:id="@+id/txt_expense_amount_for_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txt_expense_for_balance"
+                    android:layout_alignParentRight="true"
+                    android:text="Expense"/>
+
+                <TextView
+                    android:id="@+id/balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_expense_for_balance"
+                    android:layout_marginTop="10dp"
+                    android:text="Balance Amount for month"/>
+
+                <TextView
+                    android:id="@+id/balance_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/balance"
+                    android:layout_alignParentRight="true"
+                    android:text="Balance"/>
+
+            </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

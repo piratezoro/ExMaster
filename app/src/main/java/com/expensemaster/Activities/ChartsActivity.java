@@ -12,11 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidplot.pie.PieChart;
@@ -76,8 +80,30 @@ public class ChartsActivity extends AppCompatActivity {
         txtTo = (EditText) findViewById(R.id.txt_to);
         btnSearch = (Button) findViewById(R.id.btn_search);
         pie = (PieChart) findViewById(R.id.mySimplePieChart);
+/*
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
 
+        final int N = 10; // total number of textviews to add
+
+        final TextView[] myTextViews = new TextView[N]; // create an empty array;
+
+        for (int i = 0; i < N; i++) {
+            // create a new textview
+            final TextView rowTextView = new TextView(this);
+
+            // set some properties of rowTextView or something
+            rowTextView.setText("This is row #" + i);
+
+            // add the textview to the linearlayout
+            layout.addView(rowTextView);
+
+            // save a reference to the textview for later
+            myTextViews[i] = rowTextView;
+        }
+*/
         if(categoryList.isEmpty())
         {
             System.out.println("inside is empty");

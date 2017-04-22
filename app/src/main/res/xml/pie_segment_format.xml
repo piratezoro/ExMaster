@@ -3,4 +3,7 @@
 
     labelPaint.textSize="12sp"
     linePaint.strokeWidth="0dp"
+    radialEdgePaint.color="#00000000"
+    outerEdgePaint.color ="#00000000"
+    innerEdgePaint.color="#00000000"
     />
